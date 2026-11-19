@@ -10,18 +10,26 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: orbita-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-24.04
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
       - name: Instalar dependências de verificação
+        timeout-minutes: 10
+        env:
+          DEBIAN_FRONTEND: noninteractive
         run: |
           sudo apt-get update
-          sudo apt-get install -y python3-gi gir1.2-gtk-3.0 gir1.2-gdkpixbuf-2.0 pipewire-bin libfftw3-double3 desktop-file-utils dpkg gnome-shell
+          sudo apt-get install -y --no-install-recommends python3-gi gir1.2-gtk-3.0 gir1.2-gdkpixbuf-2.0 pipewire-bin libfftw3-double3 desktop-file-utils dpkg gnome-shell-common
       - name: Conferir a versão da tag
         if: startsWith(github.ref, 'refs/tags/')
         run: test "$GITHUB_REF_NAME" = "v$(cat VERSION)"
