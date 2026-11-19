@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Órbita — Configurar
+Comment=Ative o papel de parede musical na segunda área de trabalho
+Exec=orbita-desktop
+TryExec=orbita-desktop
+Icon=orbita-desktop
+Terminal=false
+Categories=Settings;DesktopSettings;
+Keywords=música;Lua;Terra;Spotify;papel de parede;
+StartupNotify=true
+StartupWMClass=configurar.py

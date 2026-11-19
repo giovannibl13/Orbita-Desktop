@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <radialGradient id="earth" cx="28%" cy="24%"><stop stop-color="#77c4e6"/><stop offset=".6" stop-color="#23668e"/><stop offset="1" stop-color="#10243c"/></radialGradient>
+    <radialGradient id="moon" cx="27%" cy="24%"><stop stop-color="#f3eee0"/><stop offset=".6" stop-color="#b8c1c2"/><stop offset="1" stop-color="#5d6a75"/></radialGradient>
+  </defs>
+  <rect x="4" y="4" width="120" height="120" rx="28" fill="#08111e"/>
+  <circle cx="91" cy="100" r="55" fill="url(#earth)"/>
+  <ellipse cx="67" cy="55" rx="45" ry="21" transform="rotate(-26 67 55)" fill="none" stroke="#91d8df" stroke-opacity=".75" stroke-width="2"/>
+  <circle cx="66" cy="49" r="25" fill="url(#moon)"/>
+  <g fill="#5c6976" opacity=".36"><circle cx="55" cy="41" r="7"/><circle cx="71" cy="56" r="6"/><circle cx="75" cy="38" r="4"/></g>
+  <circle cx="24" cy="70" r="4" fill="#d2f2e8"/>
+</svg>

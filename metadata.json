@@ -1,0 +1,7 @@
+{
+  "uuid": "orbita-desktop@local",
+  "name": "Órbita — desktop musical",
+  "description": "Papel de parede musical com visualizador e letras, exclusivamente na segunda área de trabalho.",
+  "shell-version": ["46"],
+  "version": 8
+}

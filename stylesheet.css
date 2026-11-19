@@ -1,0 +1,17 @@
+.orbita-control-hit {
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    background-color: transparent;
+}
+
+.orbita-control-hit:hover,
+.orbita-control-hit:focus {
+    border-color: rgba(222, 243, 225, 0.8);
+    background-color: rgba(222, 243, 225, 0.12);
+}
+
+.orbita-control-hit:active {
+    border-color: #eff8e9;
+    background-color: rgba(222, 243, 225, 0.25);
+}

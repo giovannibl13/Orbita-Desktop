@@ -1,0 +1,9 @@
+dist/
+build/
+__pycache__/
+*.py[cod]
+.venv/
+instalacao.json
+spotify.json
+*.log
+.DS_Store

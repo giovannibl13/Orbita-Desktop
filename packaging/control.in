@@ -1,0 +1,13 @@
+Package: orbita-desktop
+Version: @VERSION@
+Section: gnome
+Priority: optional
+Architecture: all
+Maintainer: Giovanni Puiatti <132700965+giovannibl13@users.noreply.github.com>
+Depends: gnome-shell (>= 46), gnome-shell (<< 47), python3 (>= 3.12), python3-gi, gir1.2-gdkpixbuf-2.0, gir1.2-gtk-3.0, pipewire-bin, libfftw3-double3, fonts-dejavu-core
+Installed-Size: @SIZE@
+Description: Papel de parede musical para a segunda área do GNOME
+ Terra e Lua com profundidade, visualizador de ritmo, letras sincronizadas
+ e um vinil com a capa do álbum e controles de reprodução.
+ Inclui um configurador para ativar o visual na conta do usuário.
+ Preparado para Zorin OS 18 com GNOME Shell 46.

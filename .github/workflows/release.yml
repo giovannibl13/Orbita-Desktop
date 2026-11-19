@@ -1,0 +1,61 @@
+name: Testar e gerar pacotes
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Instalar dependências de verificação
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-gi gir1.2-gtk-3.0 gir1.2-gdkpixbuf-2.0 pipewire-bin libfftw3-double3 desktop-file-utils dpkg gnome-shell
+      - name: Conferir a versão da tag
+        if: startsWith(github.ref, 'refs/tags/')
+        run: test "$GITHUB_REF_NAME" = "v$(cat VERSION)"
+      - name: Verificar o código
+        run: /usr/bin/python3 scripts/check.py
+      - name: Gerar os pacotes
+        run: /usr/bin/python3 scripts/build.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: orbita-desktop
+          path: dist/*
+          if-no-files-found: error
+  release:
+    if: startsWith(github.ref, 'refs/tags/') || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: orbita-desktop
+          path: dist
+      - name: Publicar a versão com os instaladores
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version="$(cat VERSION)"
+          tag="v$version"
+          if [ "$GITHUB_REF" = "refs/heads/main" ] && [ "$version" != "1.0.0" ]; then
+            echo "Para as próximas versões, publique a tag correspondente a VERSION."
+          elif gh release view "$tag" > /dev/null 2>&1; then
+            echo "A Release já foi criada pelo site. Os arquivos enviados manualmente serão preservados."
+          else
+            gh release create "$tag" dist/* --target "$GITHUB_SHA" --title "Órbita $version" --notes-file docs/NOTAS_DA_VERSAO.md
+          fi
